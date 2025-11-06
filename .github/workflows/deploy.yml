@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  simple-deploy:
+  deploy:
     runs-on: ubuntu-latest
     
     steps:
@@ -16,8 +16,11 @@ jobs:
       with:
         node-version: '18'
         
-    - name: Run simple test
-      run: node scripts/simple-test.js
+    - name: Install dependencies
+      run: npm install
       
-    - name: List files
-      run: ls -la
+    - name: List installed packages
+      run: npm list
+      
+    - name: Test Hardhat
+      run: npx hardhat --version
