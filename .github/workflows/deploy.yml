@@ -1,38 +1,15 @@
-name: ULTIMATE - Fix Installation
+name: FINAL TEST
 
 on:
   workflow_dispatch:
 
 jobs:
-  ultimate-fix:
+  test:
     runs-on: ubuntu-latest
-    
     steps:
     - uses: actions/checkout@v3
-      
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
+    - uses: actions/setup-node@v3
       with:
         node-version: '18'
-        
-    - name: NUCLEAR Clean
-      run: |
-        echo "=== BEFORE CLEAN ==="
-        ls -la
-        rm -rf node_modules
-        rm -f package-lock.json
-        echo "=== AFTER CLEAN ==="
-        ls -la
-        
-    - name: Install with DEBUG
-      run: |
-        npm install --loglevel=verbose
-        echo "=== INSTALLATION RESULT ==="
-        ls node_modules/.bin/ | grep hardhat || echo "HARDHAT NOT FOUND"
-        
-    - name: Emergency Test
-      run: |
-        echo "=== PACKAGE.JSON ==="
-        cat package.json
-        echo "=== CAN WE RUN HARHAT? ==="
-        npx hardhat --version || echo "HARHAT COMMAND FAILED"
+    - run: npm install
+    - run: npx hardhat --version
