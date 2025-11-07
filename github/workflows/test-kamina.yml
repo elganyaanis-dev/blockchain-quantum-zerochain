@@ -1,0 +1,31 @@
+name: 🧪 Test Kamina Token
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-kamina:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        
+    - name: Install dependencies
+      run: npm install
+      
+    - name: Compile Kamina Token
+      run: npx hardhat compile contracts/KaminaToken.sol
+      
+    - name: Test Compilation Success
+      run: echo "✅ KaminaToken compiled successfully!"
+      
+    - name: Verify Contract
+      run: |
+        echo "📁 Checking compiled contracts..."
+        ls -la artifacts/contracts/KaminaToken.sol/ || echo "No artifacts found"
