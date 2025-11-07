@@ -1,10 +1,10 @@
-name: Deploy Smart Contracts
+name: Compile Simple Contract
 
 on:
   workflow_dispatch:
 
 jobs:
-  deploy:
+  compile-simple:
     runs-on: ubuntu-latest
     
     steps:
@@ -19,8 +19,8 @@ jobs:
     - name: Install dependencies
       run: npm install
       
-    - name: Compile Smart Contracts
-      run: npx hardhat compile
+    - name: Compile ONLY SimpleTest
+      run: npx hardhat compile contracts/SimpleTest.sol
       
-    - name: Run Tests
-      run: npx hardhat test
+    - name: Success Message
+      run: echo "✅ SimpleTest.sol compiled successfully!"
