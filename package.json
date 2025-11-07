@@ -1,21 +1,4 @@
-{
-  "name": "blockchain-quantum-zerochain",
-  "version": "1.0.0",
-  "description": "Blockchain Quantum Zero-Chain with NXD token and DeFi protocols",
-  "main": "index.js",
-  "scripts": {
-    "test": "npx hardhat test",
-    "compile": "npx hardhat compile",
-    "deploy": "npx hardhat run scripts/deploy.js --network sepolia"
-  },
-  "keywords": ["blockchain", "quantum", "defi", "nxd", "web3"],
-  "author": "elganyaanis-dev",
-  "license": "MIT",
-  "devDependencies": {
-    "@nomicfoundation/hardhat-toolbox": "^3.0.0",
-    "hardhat": "^2.19.0"
-  },
-  "dependencies": {
-    "dotenv": "^16.3.1"
-  }
+"devDependencies": {
+  "@nomicfoundation/hardhat-toolbox": "^3.0.0",
+  "hardhat": "^2.19.0"
 }
