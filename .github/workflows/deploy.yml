@@ -1,43 +1,38 @@
-name: Verify Contract Paths
+name: ULTIMATE - Fix Installation
 
 on:
   workflow_dispatch:
 
 jobs:
-  verify-paths:
+  ultimate-fix:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+    - uses: actions/checkout@v3
       
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
         node-version: '18'
         
-    - name: Install dependencies
-      run: npm install
-      
-    - name: Show Hardhat configuration
-      run: cat hardhat.config.js
-      
-    - name: List ALL contract files with paths
+    - name: NUCLEAR Clean
       run: |
-        echo "=== SEARCHING FOR .SOL FILES ==="
-        find . -name "*.sol" -type f
-        echo "=== SMART-CONTRACTS FOLDER ==="
-        ls -la smart-contracts/
-        echo "=== CONTRACTS FOLDER ==="
-        ls -la smart-contracts/contracts/
+        echo "=== BEFORE CLEAN ==="
+        ls -la
+        rm -rf node_modules
+        rm -f package-lock.json
+        echo "=== AFTER CLEAN ==="
+        ls -la
         
-    - name: Test Hardhat paths command
-      run: npx hardhat paths || echo "Hardhat paths command failed"
-      
-    - name: Verify SimpleTest location
+    - name: Install with DEBUG
       run: |
-        if [ -f "smart-contracts/contracts/SimpleTest.sol" ]; then
-          echo "✅ SimpleTest.sol found at correct path!"
-        else
-          echo "❌ SimpleTest.sol NOT FOUND at expected path!"
-        fi
+        npm install --loglevel=verbose
+        echo "=== INSTALLATION RESULT ==="
+        ls node_modules/.bin/ | grep hardhat || echo "HARDHAT NOT FOUND"
+        
+    - name: Emergency Test
+      run: |
+        echo "=== PACKAGE.JSON ==="
+        cat package.json
+        echo "=== CAN WE RUN HARHAT? ==="
+        npx hardhat --version || echo "HARHAT COMMAND FAILED"
