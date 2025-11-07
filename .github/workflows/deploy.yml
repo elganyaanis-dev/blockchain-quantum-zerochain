@@ -1,10 +1,10 @@
-name: Debug Hardhat Setup
+name: Verify Contract Paths
 
 on:
   workflow_dispatch:
 
 jobs:
-  debug:
+  verify-paths:
     runs-on: ubuntu-latest
     
     steps:
@@ -19,11 +19,25 @@ jobs:
     - name: Install dependencies
       run: npm install
       
-    - name: Test Hardhat Setup
-      run: npx hardhat --version && npx hardhat compile --help
+    - name: Show Hardhat configuration
+      run: cat hardhat.config.js
       
-    - name: List contract files
-      run: find . -name "*.sol" -type f
+    - name: List ALL contract files with paths
+      run: |
+        echo "=== SEARCHING FOR .SOL FILES ==="
+        find . -name "*.sol" -type f
+        echo "=== SMART-CONTRACTS FOLDER ==="
+        ls -la smart-contracts/
+        echo "=== CONTRACTS FOLDER ==="
+        ls -la smart-contracts/contracts/
+        
+    - name: Test Hardhat paths command
+      run: npx hardhat paths || echo "Hardhat paths command failed"
       
-    - name: Check Hardhat config
-      run: cat hardhat.config.js || echo "No hardhat.config.js found"
+    - name: Verify SimpleTest location
+      run: |
+        if [ -f "smart-contracts/contracts/SimpleTest.sol" ]; then
+          echo "✅ SimpleTest.sol found at correct path!"
+        else
+          echo "❌ SimpleTest.sol NOT FOUND at expected path!"
+        fi
