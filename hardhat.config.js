@@ -1,15 +1,19 @@
-require("@nomiclabs/hardhat-waffle");
-require("@nomiclabs/hardhat-etherscan");
+require("@nomicfoundation/hardhat-toolbox");
 
 module.exports = {
-  solidity: "0.8.19",
-  networks: {
-    sepolia: {
-      url: `https://sepolia.infura.io/v3/${process.env.INFURA_API_KEY}`,
-      accounts: [process.env.DEPLOYER_PRIVATE_KEY]
+  solidity: {
+    version: "0.8.19",
+    settings: {
+      optimizer: {
+        enabled: true,
+        runs: 200
+      }
     }
   },
-  etherscan: {
-    apiKey: process.env.ETHERSCAN_API_KEY
+  paths: {
+    sources: "./smart-contracts/contracts",
+    tests: "./smart-contracts/test",
+    cache: "./cache",
+    artifacts: "./artifacts"
   }
 };
