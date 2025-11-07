@@ -11,8 +11,8 @@ module.exports = {
     }
   },
   paths: {
-    sources: "./smart-contracts/contracts",
-    tests: "./smart-contracts/test",
+    sources: "./smart-contracts/contracts",  // ✅ CORRECT
+    tests: "./smart-contracts/test",         // ✅ CORRECT
     cache: "./cache",
     artifacts: "./artifacts"
   }
