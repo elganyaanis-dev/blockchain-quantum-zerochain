@@ -1,4 +1,14 @@
-"devDependencies": {
-  "@nomicfoundation/hardhat-toolbox": "^3.0.0",
-  "hardhat": "^2.19.0"
+{
+  "name": "blockchain-quantum-zerochain",
+  "version": "1.0.0",
+  "description": "Blockchain Quantum Zero-Chain",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx hardhat test",
+    "compile": "npx hardhat compile"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^3.0.0",
+    "hardhat": "^2.19.0"
+  }
 }
